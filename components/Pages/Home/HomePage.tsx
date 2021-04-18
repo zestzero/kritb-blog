@@ -5,7 +5,7 @@ interface Props {
   isStatic: boolean;
 }
 
-export const Home: FunctionComponent<Props> = (props) => {
+export const HomePage: FunctionComponent<Props> = (props) => {
   return (
     <div>
       <div>{props.isSSR ? <h2>SSR Working</h2> : <h2>SSR Not Works</h2>}</div>
