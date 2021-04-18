@@ -4,8 +4,8 @@
   },
   "functions": {
     "predeploy": [
-      "npm --prefix ./functions run lint",
-      "npm --prefix ./functions run build"
+      "npm --prefix run eslint --ext .tsx,t.ts",
+      "npm --prefix run next build"
     ],
     "source": ".",
     "runtime": "nodejs14",
