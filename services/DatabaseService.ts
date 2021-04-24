@@ -7,7 +7,15 @@ class DatabaseService {
     try {
       return this.Database.ref(path).limitToFirst(limit).get();
     } catch (error) {
-      console.log("Firebase admin initialization error", error.stack);
+      console.log("Unable to fetch", error.stack);
+    }
+  }
+
+  public write = async (path: string, value: object) => {
+    try {
+      return this.Database.ref(path).set(value)
+    } catch (error) {
+      console.log("Unable to write", error.stack);
     }
   }
 }
