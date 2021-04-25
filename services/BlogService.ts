@@ -1,13 +1,22 @@
+import { Blog } from "gql/models/Blog";
 import { Service } from "typedi";
-import { DatabaseService } from "./DatabaseService";
+import { DatabaseService, DataSnapshot } from "./DatabaseService";
 
 @Service()
 export class BlogService {
   constructor(private databaseService: DatabaseService) {}
 
-  public getBlogs = async () => {
-    const result = await this.databaseService.fetch("blogs");
-    console.debug(result?.toJSON());
+  public getBlogs = async (): Promise<Blog[]> => {
+    const result: Blog[] = [];
+    const response = await this.databaseService.fetch("blogs");
+    if (response) {
+      response.forEach((blog: DataSnapshot) => {
+        result.push({
+          id: blog.child("id").val(),
+          title: blog.child("title").val(),
+        });
+      });
+    }
     return result;
   };
 }
